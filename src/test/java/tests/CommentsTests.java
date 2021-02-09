@@ -7,6 +7,7 @@ import data.model.user.User;
 import data.service.CommentService;
 import data.service.PostService;
 import data.service.UserService;
+import org.assertj.core.api.SoftAssertions;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -18,6 +19,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.function.Consumer;
+import java.util.regex.Pattern;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -25,7 +27,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class CommentsTests {
 
     private static final String USER_NAME = "Delphine";
-    private static String VALID_EMAIL_PATTERN = "";
+    private static Pattern VALID_EMAIL_PATTERN;
     @Autowired
     private CommentService commentService;
 
@@ -38,16 +40,21 @@ public class CommentsTests {
     @BeforeAll
     static void beforeAll() throws IOException {
         Path path = Paths.get("src/test/resources/validation/valid_email_pattern.txt");
-        VALID_EMAIL_PATTERN = new String(Files.readAllBytes(path));
+        String patternAsString = new String(Files.readAllBytes(path));
+        VALID_EMAIL_PATTERN = Pattern.compile(patternAsString);
     }
 
     @Test
     void commentsHaveValidEmail() {
-        Consumer<Comment> validateComment = c -> assertThat(c.getEmail(), Matchers.matchesPattern(VALID_EMAIL_PATTERN));
+        SoftAssertions softAssertions = new SoftAssertions();
+        Consumer<Comment> validateComment = c -> softAssertions.assertThat(c.getEmail())
+                .withFailMessage("Expected <%s> to have valid email pattern", c.getEmail())
+                .matches(VALID_EMAIL_PATTERN);
         User user = userService.findByUsername(USER_NAME);
         assertThat("Valid user is required", user, Matchers.notNullValue());
         postService.findAllForUser(user).stream()
                 .flatMap(post -> commentService.findAllForPost(post).stream())
                 .forEach(validateComment);
+        softAssertions.assertAll();
     }
 }
