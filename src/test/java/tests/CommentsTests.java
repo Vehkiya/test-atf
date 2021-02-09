@@ -44,7 +44,7 @@ public class CommentsTests {
     @Test
     void commentsHaveValidEmail() {
         Consumer<Comment> validateComment = c -> assertThat(c.getEmail(), Matchers.matchesPattern(VALID_EMAIL_PATTERN));
-        User user = userService.findByUsername(USER_NAME).orElse(null);
+        User user = userService.findByUsername(USER_NAME);
         assertThat("Valid user is required", user, Matchers.notNullValue());
         postService.findAllForUser(user).stream()
                 .flatMap(post -> commentService.findAllForPost(post).stream())
