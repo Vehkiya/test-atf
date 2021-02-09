@@ -11,10 +11,11 @@
     <properties>
         <!--  Dependencies versions -->
         <spring.boot.version>2.4.2</spring.boot.version>
+        <junit.version>5.7.0</junit.version>
+        <lombok.version>1.18.18</lombok.version>
         <!-- Plugins versions -->
         <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
         <maven.surefire.plugin.version>3.0.0-M5</maven.surefire.plugin.version>
-        <lombok.version>1.18.18</lombok.version>
     </properties>
 
     <dependencies>
@@ -27,6 +28,12 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>${lombok.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
@@ -45,9 +52,27 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${maven.surefire.plugin.version}</version>
-                <configuration>
-                    <testSourceDirectory>atf.health</testSourceDirectory>
-                </configuration>
+                <executions>
+                    <execution>
+                        <id>atf-health</id>
+                        <goals>
+                            <goal>test</goal>
+                        </goals>
+                        <configuration>
+                            <groups>health</groups>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>regression</id>
+                        <goals>
+                            <goal>test</goal>
+                        </goals>
+                        <configuration>
+                            <groups>!health</groups>
+                            <testFailureIgnore>true</testFailureIgnore>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
