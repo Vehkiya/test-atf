@@ -1,2 +1,5 @@
 environment:
   host: https://jsonplaceholder.typicode.com/
+
+spring.profiles.active:
+  - api
