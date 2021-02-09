@@ -4,6 +4,20 @@ orbs:
   maven: circleci/maven@1.1.0
 
 workflows:
-  maven_test:
+  build:
     jobs:
-      - maven/test # checkout, build, test, and upload test results
+      - maven/test:
+          name: Run Tests
+          command: 'compile resources:testResources compiler:testCompile surefire:test@atf-health'
+  regression:
+    triggers:
+      - schedule:
+          cron: "0 0 * * *"
+          filters:
+            branches:
+              only:
+                - main
+    jobs:
+      - maven/test:
+          name: Run Regression Tests
+          command: 'compile resources:testResources compiler:testCompile surefire:test@regression'
