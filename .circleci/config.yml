@@ -19,5 +19,14 @@ workflows:
                 - main
     jobs:
       - maven/test:
-          name: Run Regression Tests
+          name: Nightly Regression
           command: 'compile resources:testResources compiler:testCompile surefire:test@regression'
+  manual-regression:
+    jobs:
+      - hold:
+          type: approval
+      - maven/test:
+          name: Manual Regression
+          command: 'compile resources:testResources compiler:testCompile surefire:test@regression'
+          requires:
+            - hold
