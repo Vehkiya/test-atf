@@ -1,6 +1,6 @@
-package atf.configuration;
+package common.configuration;
 
-import atf.properties.EnvironmentProperties;
+import common.properties.EnvironmentProperties;
 import io.restassured.RestAssured;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;

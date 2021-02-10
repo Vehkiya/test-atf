@@ -1,4 +1,4 @@
-package atf.properties;
+package common.properties;
 
 import lombok.Getter;
 import lombok.Setter;
