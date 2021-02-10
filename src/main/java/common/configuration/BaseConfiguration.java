@@ -1,6 +1,6 @@
-package atf.configuration;
+package common.configuration;
 
-import atf.properties.EnvironmentProperties;
+import common.properties.EnvironmentProperties;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Import;
@@ -8,5 +8,5 @@ import org.springframework.context.annotation.Import;
 @SpringBootConfiguration
 @Import(ApiProfileConfiguration.class)
 @EnableConfigurationProperties({EnvironmentProperties.class})
-public class TestConfiguration {
+public class BaseConfiguration {
 }

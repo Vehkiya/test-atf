@@ -1,12 +1,10 @@
 package data.service.api;
 
-import atf.properties.EnvironmentProperties;
 import data.model.Comment;
 import data.model.Post;
 import data.service.CommentService;
 import io.restassured.RestAssured;
 import org.apache.http.HttpStatus;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;

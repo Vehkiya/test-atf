@@ -1,7 +1,7 @@
-package tests;
+package system.tests;
 
 
-import atf.configuration.TestConfiguration;
+import common.configuration.BaseConfiguration;
 import data.model.Comment;
 import data.model.user.User;
 import data.service.CommentService;
@@ -23,7 +23,7 @@ import java.util.regex.Pattern;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 
-@SpringBootTest(classes = TestConfiguration.class)
+@SpringBootTest(classes = BaseConfiguration.class)
 public class CommentsTests {
 
     private static final String USER_NAME = "Delphine";
