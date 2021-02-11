@@ -25,4 +25,15 @@ public class PostServiceApiImpl implements PostService {
                 .response()
                 .as(Post[].class));
     }
+
+    @Override
+    public Collection<Post> findAll() {
+        return Arrays.asList(RestAssured.when()
+                .get(Endpoints.GET_POSTS.uri())
+                .then()
+                .statusCode(HttpStatus.SC_OK)
+                .extract()
+                .response()
+                .as(Post[].class));
+    }
 }

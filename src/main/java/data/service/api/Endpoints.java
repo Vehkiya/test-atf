@@ -8,8 +8,8 @@ import lombok.experimental.Accessors;
 public enum Endpoints {
     GET_USER("/users/{userId}"),
     GET_ALL_USERS("/users"),
-    GET_POST("/posts"),
-    GET_POSTS("/posts/{postId}"),
+    GET_POST("/posts/{postId}"),
+    GET_POSTS("/posts"),
     GET_USER_POSTS("/users/{userId}/posts"),
     GET_COMMENT("/comments/{commentId}"),
     GET_COMMENTS("/comments"),
