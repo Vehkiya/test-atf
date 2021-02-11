@@ -7,26 +7,12 @@ workflows:
   build:
     jobs:
       - maven/test:
-          name: Run Tests
-          command: 'compile resources:testResources compiler:testCompile surefire:test@atf-health'
-  regression:
-    triggers:
-      - schedule:
-          cron: "0 0 * * *"
-          filters:
-            branches:
-              only:
-                - main
+          name: Run ATF Unit Tests
+          command: verify -P build
+          test_results_path: core/target/surefire-reports
+  run-system-integration-tests:
     jobs:
       - maven/test:
-          name: Nightly Regression
-          command: 'compile resources:testResources compiler:testCompile surefire:test@regression'
-  manual-regression:
-    jobs:
-      - hold:
-          type: approval
-      - maven/test:
-          name: Manual Regression
-          command: 'compile resources:testResources compiler:testCompile surefire:test@regression'
-          requires:
-            - hold
+          name: Run System Integration Tests
+          command: verify -P system-integration
+          test_results_path: system-integration/target/failsafe-reports
