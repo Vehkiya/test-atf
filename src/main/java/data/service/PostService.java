@@ -14,4 +14,9 @@ public interface PostService {
      * Retrieve all posts authored by given {@link User}
      */
     Collection<Post> findAllForUser(User user);
+
+    /**
+     * Retrieve all posts
+     */
+    Collection<Post> findAll();
 }
