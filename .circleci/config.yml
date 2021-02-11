@@ -3,12 +3,61 @@ version: 2.1
 orbs:
   maven: circleci/maven@1.1.0
 
+
+commands:
+  export_cucumber_results:
+    parameters:
+      report_dir:
+        default: target/cucumber-reports
+        type: string
+    steps:
+      - run:
+          name: Save test results
+          command: |
+            mkdir -p ~/cucumber
+            cp -R << parameters.report_dir >>/. ~/cucumber
+          when: always
+      - store_test_results:
+          path: ~/cucumber
+      - store_artifacts:
+          path: ~/cucumber
+
+
+jobs:
+  run_cucumber_test:
+    parameters:
+      app_src_directory:
+        default: ''
+        description: >-
+          Useful when the source of your maven project is not in the root directory
+          of your git repo. Supply the name of the directory or relative path of the
+          directory containing your source code.
+        type: string
+      command:
+        default: verify
+        description: The maven command to run.
+        type: string
+    docker:
+      - image: cimg/openjdk:8.0
+    steps:
+      - checkout
+      - maven/with_cache:
+          steps:
+            - run:
+                command: mvn << parameters.command >> "$@"
+                name: Run Tests
+                working_directory: << parameters.app_src_directory >>
+      - export_cucumber_results:
+          report_dir: acceptance/target/junit-report
+
+
+
 workflows:
   build:
     jobs:
       - maven/test:
           name: Run ATF Unit Tests
-          command: verify -P build
+          command: test -P build
           test_results_path: core/target/surefire-reports
   run-system-integration-tests:
     jobs:
@@ -16,3 +65,8 @@ workflows:
           name: Run System Integration Tests
           command: verify -P system-integration
           test_results_path: system-integration/target/failsafe-reports
+  run-acceptance-tests:
+    jobs:
+      - run_cucumber_test:
+          name: Run Acceptance Tests
+          command: verify -P acceptance-test
