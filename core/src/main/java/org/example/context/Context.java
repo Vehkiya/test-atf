@@ -12,8 +12,6 @@ public interface Context {
 
     /**
      * Retrieve the {@link Object} associated with provided {@link ContextKey} discriminator
-     *
-     * @return
      */
     Object get(ContextKey key);
 
@@ -21,12 +19,5 @@ public interface Context {
      * Delete all data currently contained in the org.example.context
      */
     void reset();
-
-    /**
-     * Marker interface to be used as discriminator for saving or retrieving data
-     */
-    interface ContextKey {
-
-    }
 
 }

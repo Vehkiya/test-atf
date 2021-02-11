@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Import;
 @Configuration
 @Import({BaseConfiguration.class,
         ApiProfileConfiguration.class})
-@ComponentScan({"org/example/actions",
-        "org/example/context"})
+@ComponentScan({"org.example.actions",
+        "org.example.context"})
 public class CucumberSpringConfig {
 }

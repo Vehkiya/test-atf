@@ -1,6 +1,6 @@
 package org.example.context;
 
-public enum Keys implements Context.ContextKey {
+public enum Keys implements ContextKey {
     CURRENT_POST,
     CURRENT_COMMENT;
 }
