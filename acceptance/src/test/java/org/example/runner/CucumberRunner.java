@@ -11,7 +11,7 @@ import org.junit.runner.RunWith;
                 "junit:target/junit-report/cucumber.xml"},
         features = {"src/test/resources/features"},
         glue = {"org.example.steps",
-                "org.example.config"}
+                "org.example.acceptance.config"}
 )
 public class CucumberRunner {
 }

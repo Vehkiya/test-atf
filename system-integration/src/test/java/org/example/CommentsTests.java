@@ -2,13 +2,13 @@ package org.example;
 
 
 import org.assertj.core.api.SoftAssertions;
-import org.example.config.ApiProfileConfiguration;
-import org.example.configuration.BaseConfiguration;
-import org.example.model.Comment;
-import org.example.model.user.User;
-import org.example.service.CommentService;
-import org.example.service.PostService;
-import org.example.service.UserService;
+import org.example.core.configuration.BaseConfiguration;
+import org.example.domain.config.ApiProfileConfiguration;
+import org.example.domain.model.Comment;
+import org.example.domain.model.user.User;
+import org.example.domain.service.CommentService;
+import org.example.domain.service.PostService;
+import org.example.domain.service.UserService;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
