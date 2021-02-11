@@ -6,7 +6,14 @@
 
     <groupId>org.example</groupId>
     <artifactId>test-atf</artifactId>
+    <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>acceptance</module>
+        <module>system-integration</module>
+        <module>domain</module>
+        <module>core</module>
+    </modules>
 
     <properties>
         <!--  Dependencies versions -->
@@ -20,6 +27,7 @@
         <!-- Plugins versions -->
         <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
         <maven.surefire.plugin.version>3.0.0-M5</maven.surefire.plugin.version>
+        <maven.failsafe.plugin.version>3.0.0-M5</maven.failsafe.plugin.version>
     </properties>
 
     <dependencies>
@@ -83,32 +91,6 @@
                     <source>1.8</source>
                     <target>1.8</target>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>${maven.surefire.plugin.version}</version>
-                <executions>
-                    <execution>
-                        <id>atf-health</id>
-                        <goals>
-                            <goal>test</goal>
-                        </goals>
-                        <configuration>
-                            <groups>health</groups>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>regression</id>
-                        <goals>
-                            <goal>test</goal>
-                        </goals>
-                        <configuration>
-                            <groups>!health</groups>
-                            <testFailureIgnore>true</testFailureIgnore>
-                        </configuration>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>
