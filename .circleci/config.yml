@@ -70,3 +70,19 @@ workflows:
       - run_cucumber_test:
           name: Run Acceptance Tests
           command: verify -P acceptance-test
+  nightly-regression:
+    triggers:
+      - schedule:
+          cron: "0 0 * * *"
+          filters:
+            branches:
+              only:
+                - main
+    jobs:
+      - maven/test:
+          name: Run System Integration Tests
+          command: verify -P system-integration
+          test_results_path: system-integration/target/failsafe-reports
+      - run_cucumber_test:
+          name: Run Acceptance Tests
+          command: verify -P acceptance-test
