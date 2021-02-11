@@ -48,7 +48,7 @@ jobs:
                 name: Run Tests
                 working_directory: << parameters.app_src_directory >>
       - export_cucumber_results:
-          report_dir: acceptance/target/junit-report
+          report_dir: acceptance/target/cucumber-reports
 
 
 
