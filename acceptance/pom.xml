@@ -14,6 +14,7 @@
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
+        <cucumber-reporting.version>5.4.0</cucumber-reporting.version>
     </properties>
 
     <dependencies>
@@ -73,6 +74,29 @@
                                     <goal>integration-test</goal>
                                     <goal>verify</goal>
                                 </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>net.masterthought</groupId>
+                        <artifactId>maven-cucumber-reporting</artifactId>
+                        <version>${cucumber-reporting.version}</version>
+                        <executions>
+                            <execution>
+                                <id>generate-reports</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>generate</goal>
+                                </goals>
+                                <configuration>
+                                    <skip>false</skip>
+                                    <outputDirectory>${project.build.directory}/cucumber-reports</outputDirectory>
+                                    <inputDirectory>${project.build.directory}/cucumber-reports</inputDirectory>
+                                    <jsonFiles>
+                                        <param>**/report.cucumber</param>
+                                    </jsonFiles>
+                                    <checkBuildResult>false</checkBuildResult>
+                                </configuration>
                             </execution>
                         </executions>
                     </plugin>
