@@ -2,12 +2,12 @@ package org.example.steps;
 
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.example.actions.CommentActions;
-import org.example.context.Context;
-import org.example.context.Keys;
-import org.example.model.Comment;
-import org.example.model.Post;
-import org.example.service.CommentService;
+import org.example.acceptance.actions.CommentActions;
+import org.example.acceptance.context.Keys;
+import org.example.core.context.Context;
+import org.example.domain.model.Comment;
+import org.example.domain.model.Post;
+import org.example.domain.service.CommentService;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.springframework.beans.factory.annotation.Autowired;

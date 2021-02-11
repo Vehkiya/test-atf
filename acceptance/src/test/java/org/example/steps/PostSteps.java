@@ -1,10 +1,10 @@
 package org.example.steps;
 
 import io.cucumber.java.en.Given;
-import org.example.actions.PostActions;
-import org.example.context.Context;
-import org.example.context.Keys;
-import org.example.model.Post;
+import org.example.acceptance.actions.PostActions;
+import org.example.acceptance.context.Keys;
+import org.example.core.context.Context;
+import org.example.domain.model.Post;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class PostSteps {
