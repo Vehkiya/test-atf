@@ -25,7 +25,7 @@ import java.util.regex.Pattern;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 @SpringBootTest(classes = {BaseConfiguration.class, ApiProfileConfiguration.class})
-public class CommentsTests {
+class CommentsTests {
 
     private static final String USER_NAME = "Delphine";
     private static Pattern VALID_EMAIL_PATTERN;
