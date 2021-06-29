@@ -31,7 +31,9 @@ public class CommentSteps {
         switch (action.toLowerCase()) {
             case "add":
             case "added":
-                comment = commentService.add(commentActions.generateComment());
+                final Comment generateComment = commentActions.generateComment();
+                generateComment.setPostId(post.getId());
+                comment = commentService.add(generateComment);
                 break;
             case "delete":
             case "deleted":

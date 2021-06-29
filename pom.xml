@@ -19,7 +19,7 @@
         <!--  Dependencies versions -->
         <spring.boot.version>2.4.2</spring.boot.version>
         <junit.version>5.7.0</junit.version>
-        <lombok.version>1.18.18</lombok.version>
+        <lombok.version>1.18.20</lombok.version>
         <hamcrest.version>2.2</hamcrest.version>
         <rest.assured.version>4.3.0</rest.assured.version>
         <jackson.version>2.12.1</jackson.version>
@@ -28,6 +28,7 @@
         <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
         <maven.surefire.plugin.version>3.0.0-M5</maven.surefire.plugin.version>
         <maven.failsafe.plugin.version>3.0.0-M5</maven.failsafe.plugin.version>
+        <java.version>16</java.version>
     </properties>
 
     <dependencies>
@@ -71,8 +72,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${maven.compiler.plugin.version}</version>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
                 </configuration>
             </plugin>
         </plugins>
