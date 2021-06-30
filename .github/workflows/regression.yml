@@ -5,7 +5,7 @@ name: GitHub - Run Nightly Regression
 
 on:
   schedule:
-    - cron: "*/5 * * * *"
+    - cron: "30 3 * * *"
 
 jobs:
   build:
@@ -17,7 +17,7 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v2
         with:
-          java-version: '16'
+          java-version: '11'
           distribution: 'adopt'
       - name: Build with Maven
         run: mvn -B clean compile verify -P acceptance-test --file pom.xml

@@ -32,7 +32,7 @@ jobs:
     # Be sure to update the Docker image tag below to openjdk version of your application.
     # A list of available CircleCI Docker Convenience Images are available here: https://circleci.com/developer/images/image/cimg/openjdk
     docker:
-      - image: cimg/openjdk:16.0
+      - image: cimg/openjdk:11.0
     steps:
       # Checkout the code as the first step.
       - checkout
@@ -54,7 +54,7 @@ jobs:
         description: The maven command to run.
         type: string
     docker:
-      - image: cimg/openjdk:16.0
+      - image: cimg/openjdk:11.0
     steps:
       - checkout
       - maven/with_cache:
@@ -81,17 +81,14 @@ workflows:
                 - feature/ci-cd-integrations_demo
   run-system-integration-tests:
     jobs:
-      - build-and-test
       - maven/test:
           name: CircleCI - Run System Integration tests on PR
-          command: verify -P system-integration
+          command: clean compile verify -P system-integration
           test_results_path: system-integration/target/failsafe-reports
-          requires:
-            - build-and-test
   nightly-regression:
     triggers:
       - schedule:
-          cron: "5,10,15,20,25,30,35,40,45,50,55,0 * * * *"
+          cron: "30 3 * * *"
           filters:
             branches:
               only:
